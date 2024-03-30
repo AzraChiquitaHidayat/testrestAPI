@@ -27,6 +27,10 @@ export default function () {
         const createResponse = http.post('https://reqres.in/api/users', createPayload, createParams);
         check(createResponse, {
             'Create API is successful': (res) => res.status === 201,
+            'Response name and job should same with request': (res) => {
+                let responseBody = JSON.parse(res.body);
+                return responseBody.name === 'morpheus' && responseBody.job === 'leader';
+            }
         });
 
         // Menunggu 1 detik sebelum melanjutkan ke operasi berikutnya
@@ -48,6 +52,10 @@ export default function () {
         const updateResponse = http.put('https://reqres.in/api/users/2', updatePayload, updateParams);
         check(updateResponse, {
             'Update API is successful': (res) => res.status === 200,
+            'Response name and job should same with request': (res) => {
+                let responseBody = JSON.parse(res.body);
+                return responseBody.name === 'morpheus' && responseBody.job === 'zion resident';
+            }
         });
 
         // Menunggu 1 detik sebelum melanjutkan ke operasi berikutnya
